@@ -1,1 +1,1135 @@
-<h1>Iniciando</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Músicas para Missa - 33º Domingo do Tempo Comum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2E7D32; /* Verde litúrgico para o Tempo Comum */
+            --secondary: #4CAF50; /* Verde mais claro complementar */
+            --accent: #66BB6A; /* Verde mais vibrante para detalhes */
+            --light: #f0f0f0; /* Cinza claro para textos em fundos escuros */
+            --dark: #1a1a1a; /* Preto ou cinza muito escuro para fundos principais */
+            --liturgical-color: #4CAF50; /* Verde litúrgico padrão */
+            --font-size: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #f5f7fa, #e4e7ec);
+            color: var(--dark);
+            font-size: var(--font-size);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+
+        .banner-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 0 20px 20px 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 180px;
+            display: block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 20px;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .celebration-info {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .liturgy-section {
+            background: white;
+            margin: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .liturgy-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .liturgy-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .liturgy-header h2 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .liturgy-icon {
+            font-size: 1.2rem;
+        }
+
+        .liturgy-arrow {
+            transition: transform 0.3s;
+        }
+
+        .liturgy-content {
+            background-color: white;
+            display: none;
+            border-left: 3px solid var(--accent);
+            padding: 20px;
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+
+        .liturgy-content.expanded {
+            display: block;
+        }
+
+        .liturgy-role {
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: 15px;
+        }
+
+        .liturgy-response {
+            font-style: italic;
+            color: var(--secondary);
+            margin-left: 20px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .font-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .font-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .font-btn:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 20px;
+            padding: 5px 12px;
+            width: 180px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 5px;
+            background: transparent;
+        }
+
+        .music-list {
+            padding: 15px;
+        }
+
+        .moment-section {
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            scroll-margin-top: 80px;
+        }
+
+        .moment-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .moment-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .moment-header h2 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .moment-icon {
+            font-size: 1.1rem;
+        }
+
+        .moment-arrow {
+            transition: transform 0.3s;
+        }
+
+        .moment-content {
+            background-color: white;
+            display: none;
+            border-left: 3px solid var(--accent);
+        }
+
+        .moment-content.expanded {
+            display: block;
+        }
+
+        .song-item {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .song-item:last-child {
+            border-bottom: none;
+        }
+
+        .song-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .song-key {
+            background-color: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .song-lyrics {
+            white-space: pre-line;
+            line-height: 1.8;
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+            margin-top: 10px;
+            font-size: calc(var(--font-size) + 2px);
+            text-align: center;
+        }
+
+        .chord {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .liturgy-menu {
+            background: white;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .liturgy-menu h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .liturgy-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .liturgy-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: var(--light);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .liturgy-link:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .liturgy-link i {
+            font-size: 1.1rem;
+        }
+
+        .footer {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.8rem;
+        }
+
+        .action-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .back-to-liturgy {
+            display: block;
+            margin: 15px auto;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+            max-width: 200px;
+        }
+
+        .back-to-liturgy:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --font-size: 15px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .moment-header h2 {
+                font-size: 1.1rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .search-box {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .liturgy-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --font-size: 14px;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .moment-header {
+                padding: 12px;
+            }
+
+            .song-item {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="banner-container">
+        <img src="img/banner.jpg" alt="Missa de Finados - Ministério de Música Chave de Davi" class="banner">
+    </div>
+
+    <header>
+        <div class="header-decoration"></div>
+        <div class="header-content">
+            <h1><i class="fas fa-cross"></i> Músicas para Missa</h1>
+            <div class="subtitle">33º Domingo do Tempo Comum</div>
+            <div class="celebration-info">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Cor Litúrgica: Verde</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Liturgia do Dia Expansível -->
+    <div class="liturgy-section">
+        <div class="liturgy-header">
+            <h2><i class="fas fa-book-bible liturgy-icon"></i> Liturgia do Dia</h2>
+            <span class="liturgy-arrow">▼</span>
+        </div>
+        <div class="liturgy-content">
+            <strong>33º Domingo do Tempo Comum</strong><br>
+            Cor litúrgica: <strong style="color: var(--primary);">Verde</strong>
+
+            <strong>RITOS INICIAIS</strong><br>
+            <span class="liturgy-role">Sacerdote:</span> Em nome do Pai, do Filho ✠ e do Espírito Santo.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Amém.</span><br>
+            <span class="liturgy-role">Sacerdote:</span> A graça de nosso Senhor Jesus Cristo, o amor do Pai e a comunhão do Espírito Santo estejam convosco.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Bendito seja Deus, que nos reuniu no amor de Cristo.</span><br>
+
+            <strong>LITURGIA DA PALAVRA</strong><br>
+
+            <strong>Primeira Leitura</strong> – Malaquias 3,19-20a<br>
+            <span class="liturgy-role">Leitor:</span> Leitura da Profecia de Malaquias.<br>
+            Eis que virá o dia, abrasador como fornalha; e serão como palha todos os soberbos e malfeitores. O dia que há de vir os abrasará – diz o Senhor dos Exércitos – e não lhes deixará raiz nem ramo. Para vós que temeis o meu nome, nascerá o sol da justiça, trazendo nos seus raios a salvação.<br>
+            <span class="liturgy-role">Leitor:</span> Palavra do Senhor.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Graças a Deus.</span><br>
+
+            <strong>Salmo Responsorial</strong> – Salmo 97(98),5-6.7-8.9a.9bc<br>
+            <span class="liturgy-role">R.</span> <span class="liturgy-response">O Senhor virá julgar a terra inteira; com justiça julgará.</span><br>
+            Cantai salmos ao Senhor ao som da harpa e da cítara suave! Aclamai, com os clarins e as trombetas, ao Senhor, o nosso Rei!<br>
+            Aplauda o mar com todo ser que nele vive, o mundo inteiro e toda gente! As montanhas e os rios batam palmas e exultem de alegria.<br>
+            Exultem na presença do Senhor, pois ele vem julgar a terra inteira; julgará o universo com justiça e as nações com equidade.<br>
+
+            <strong>Segunda Leitura</strong> – 2 Tessalonicenses 3,7-12<br>
+            <span class="liturgy-role">Leitor:</span> Leitura da Segunda Carta de São Paulo aos Tessalonicenses.<br>
+            Caríssimos: bem sabeis como deveis seguir o nosso exemplo, pois não temos vivido entre vós na ociosidade, nem comemos de graça o pão de ninguém. Trabalhamos dia e noite, com esforço e fadiga, para não sermos pesados a nenhum de vós. Quando estávamos entre vós, já vos dávamos esta ordem: "Quem não quer trabalhar, também não deve comer". Ora, ouvimos dizer que entre vós há alguns que vivem à toa, sem fazerem trabalho algum. A esses ordenamos, em nome do Senhor Jesus Cristo, que trabalhem tranquilamente, para ganharem o pão que comem.<br>
+            <span class="liturgy-role">Leitor:</span> Palavra do Senhor.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Graças a Deus.</span><br>
+
+            <strong>Aclamação ao Evangelho</strong><br>
+            <span class="liturgy-role">R.</span> <span class="liturgy-response">Aleluia, aleluia!</span><br>
+
+            <strong>Evangelho</strong> – Lucas 21,5-19<br>
+            <span class="liturgy-role">Sacerdote:</span> O Senhor esteja convosco.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Ele está no meio de nós.</span><br>
+            <span class="liturgy-role">Sacerdote:</span> Proclamação do Evangelho de Jesus Cristo segundo Lucas.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Glória a vós, Senhor.</span><br>
+            Naquele tempo, disse Jesus às multidões: "Quando virdes Jerusalém cercada por exércitos, então sabei que a sua desolação está próxima. ..." (segue o texto de Lc 21,5-19)<br>
+            <span class="liturgy-role">Sacerdote:</span> Palavra da Salvação.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Glória a vós, Senhor.</span><br>
+
+            <strong>LITURGIA EUCARÍSTICA</strong><br>
+            (Aqui você pode manter as orações de oferendas, consagração, etc., conforme o missal específico usado no seu site.)
+
+            <strong>RITOS FINAIS</strong><br>
+            <span class="liturgy-role">Sacerdote:</span> O Senhor esteja convosco.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Ele está no meio de nós.</span><br>
+            <span class="liturgy-role">Sacerdote:</span> Abençoe-vos Deus Todo-Poderoso, Pai ✠ e Filho e Espírito Santo.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Amém.</span><br>
+            <span class="liturgy-role">Sacerdote:</span> Ide em paz, e o Senhor vos acompanhe.<br>
+            <span class="liturgy-role">Assembleia:</span> <span class="liturgy-response">Graças a Deus.</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="font-controls">
+            <span>Tamanho da fonte:</span>
+            <button class="font-btn" id="decrease-font" title="Diminuir fonte">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button class="font-btn" id="reset-font" title="Fonte padrão">
+                A
+            </button>
+            <button class="font-btn" id="increase-font" title="Aumentar fonte">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Buscar música...">
+        </div>
+    </div>
+
+    <div class="music-list" id="music-list">
+        <!-- As músicas serão inseridas aqui pelo JavaScript -->
+    </div>
+
+    <!-- Menu de Navegação no Final -->
+    <div class="liturgy-menu">
+        <h2><i class="fas fa-list-alt"></i> Navegação Rápida</h2>
+        <div class="liturgy-links" id="liturgy-links">
+            <!-- Os links serão gerados pelo JavaScript -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-cross"></i>
+                <span>Missa - Ministério de Música Filhos de Maria</span>
+            </div>
+            <div class="footer-actions">
+                <button class="action-btn" id="expand-all">
+                    <i class="fas fa-expand"></i> Expandir Tudo
+                </button>
+                <button class="action-btn" id="collapse-all">
+                    <i class="fas fa-compress"></i> Recolher Tudo
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dados das músicas para a Missa - 33° Domingo do Tempo Comum | Domingo
+    const musicData = [
+        {
+            moment: "Entrada",
+            icon: "fas fa-door-open",
+            songs: [
+                {
+                    title: "Hoje É Tempo de Louvar a Deus",
+                    key: "D",
+                    lyrics: `Hoje é tempo de louvar a Deus
+Em nós agora habita o Seu Espírito
+Então é só cantar e a Cristo exaltar
+E Sua glória encherá esse lugar
+Vem louvar, vem louvar
+
+No meio dos louvores, Deus habita
+É Seu prazer cumprir o que nos diz
+Então é só cantar e a Cristo exaltar
+E Sua glória encherá este lugar
+Vem louvar, vem louvar
+
+Hoje é tempo de louvar a Deus
+Em nós agora habita o Seu Espírito
+Então é só cantar e a Cristo exaltar
+E Sua glória encherá este lugar
+Vem louvar, vem louvar
+Glória a Deus, glória a Deus`
+                }
+            ]
+        },
+        {
+            moment: "Ato Penitencial",
+            icon: "fas fa-hands-praying",
+            songs: [
+                {
+                    title: "Muito Perdoais - Comunidade Católica Shalom",
+                    key: "Em (G)",
+                    lyrics: `Senhor, que viestes
+Não para condenar
+Mas para perdoar
+Tende piedade de nós
+Kyrie eleison
+Kyrie eleison
+Kyrie eleison
+
+Cristo, que Vos alegrais
+Pelo pecador arrependido
+Tende piedade de nós
+Christe eleison
+Christe eleison
+Christe eleison
+
+Senhor, que muito perdoais
+A todo aquele que muito ama
+Tende piedade de nós
+Kyrie eleison
+Kyrie eleison
+Kyrie eleison`
+                }
+            ]
+        },{
+            moment: "Glória",
+            icon: "fas fa-hands-praying",
+            songs: [
+                {
+                    title: "Glória a Deus Nas Alturas - Eliana Ribeiro",
+                    key: "Em (G)",
+                    lyrics: `Glória a Deus nas alturas
+E paz na terra aos homens por Ele amados
+Senhor Deus, Rei dos céus, Deus Pai todo-poderoso
+
+Nós vos louvamos
+Nós vos bendizemos
+Nós vos adoramos
+Nós vos glorificamos
+Nós vos damos graças por vossa imensa glória
+
+Senhor Jesus Cristo, Filho Unigênito
+Senhor Deus, Cordeiro de Deus, Filho de Deus Pai
+Vós que tirais o pecado do mundo, tende piedade de nós
+Vós que tirais o pecado do mundo, acolhei a nossa súplica
+Vós que estais à direita do Pai
+
+Tende piedade de nós
+Só vós sois Santo
+Só vós o Senhor
+Só vês o Altíssimo, Jesus Cristo
+
+Com o Espírito Santo
+Na glória de Deus Pai, amém!
+Na glória de Deus Pai, amém!
+Na glória de Deus Pai, amém!
+Na glória de Deus Pai, amém!`
+                }
+            ]
+        },
+        {
+            moment: "Salmo",
+            icon: "fas fa-book-bible",
+            songs: [
+                {
+                    title: "SALMO Responsório Sl 97(98),5-6.7-8.9a.9bc (R. cf. 9)",
+                    key: "D",
+                    lyrics: `- O Senhor virá julgar a terra inteira; com justiça julgará.
+
+- O Senhor virá julgar a terra inteira; com justiça julgará.
+
+- Cantai salmos ao Senhor ao som da harpa e da cítara suave! Aclamai, com os clarins e as trombetas, ao Senhor, o nosso Rei!
+
+- Aplauda o mar com todo ser que nele vive, o mundo inteiro e toda gente! As montanhas e os rios batam palmas e exultem de alegria. 
+
+- Exultem na presença do Senhor, pois ele vem, vem julgar a terra inteira. Julgará o universo com justiça e as nações com equidade.`
+                }
+            ]
+        },
+        {
+            moment: "Aclamação",
+            icon: "fas fa-music",
+            songs: [
+                {
+                    title: "Evangelho (Lc 21,5-19)",
+                    key: "D",
+                    lyrics: `- Aleluia, Aleluia, Aleluia.
+
+- Levantai vossa cabeça e olhai, pois a vossa redenção se aproxima!`
+                }
+            ]
+        },
+        {
+            moment: "Ofertório",
+            icon: "fas fa-gift",
+            songs: [
+                {
+                    title: "Venho, Senhor, Minha Vida Oferecer",
+                    key: "Bm",
+                    lyrics: `Venho, Senhor, minha vida oferecer
+Como oferta de amor e sacrifício
+Quero minha vida a Ti entregar
+Como oferta viva em Teu altar
+
+Venho, Senhor, minha vida oferecer
+Como oferta de amor e sacrifício
+Quero minha vida a Ti entregar
+Como oferta viva em Teu altar
+
+Pois pra Te adorar foi que eu nasci
+Cumpre em mim o Teu querer
+Faça o que está em Teu coração
+E que a cada dia, eu queira mais e mais
+Estar ao Teu lado, Senhor
+
+Pois pra Te adorar foi que eu nasci
+Cumpre em mim o Teu querer
+Faça o que está em Teu coração
+E que a cada dia, eu queira mais e mais
+Estar ao Teu lado, Senhor
+
+E que a cada dia, eu queira mais e mais
+Estar ao Teu lado
+Estar ao Teu lado, Senhor`
+                }
+            ]
+        },
+        {
+            moment: "Santo",
+            icon: "fas fa-church",
+            songs: [
+                {
+                    title: "Santo, Santo, Santo!",
+                    key: "D",
+                    lyrics: `Santo, Santo, Santo!
+Senhor Deus do universo
+O céu e a terra proclamam
+A vossa glória!
+
+Hosana nas alturas, Hosana
+Hosana nas alturas, Hosana
+
+Bendito aquele que vem
+Em nome do Senhor
+Bendito aquele que vem
+Em nome do Senhor
+
+Hosana nas alturas, Hosana
+Hosana nas alturas, Hosana`
+                }
+            ]
+        },
+        {
+            moment: "Amém",
+            icon: "fas fa-check-circle",
+            songs: [
+                {
+                    title: "AMÉM",
+                    key: "F",
+                    lyrics: `Amem amém a a a amem`
+                }
+            ]
+        },
+        {
+            moment: "Comunhão",
+            icon: "fas fa-wine-glass-alt",
+            songs: [
+                {
+                    title: "Mística Sublime",
+                    key: "F",
+                    lyrics: `Mística sublime Te receber e ter comunhão
+Ter correndo em mim Teu sangue, Deus
+Estou em comunhão
+
+Alguém dirá que um Deus tão grande assim
+Não se dará por mim
+O que os meus olhos veem
+Não é o que minh'alma diz
+
+Mística sublime Te receber e ter comunhão
+Ter correndo em mim Teu sangue, Deus
+Estou em comunhão
+
+Alguém dirá que um Deus tão grande assim
+Não se dará por mim
+O que os meus olhos veem
+Não é o que minh'alma diz
+E ela diz
+
+Já não é mais vinho, não
+É o sangue do meu Deus
+Já não é mais pão aqui
+É o corpo do meu amor, do meu amor
+
+Nesse lugar, eu posso dizer
+Que estás dentro de mim
+E eu dentro de Você
+
+Nesse lugar, eu posso dizer
+Que estás dentro de mim
+E eu dentro de Você
+
+E eu dentro de Você
+E eu dentro de Você
+E eu dentro de Você
+E eu dentro de Você
+
+E eu dentro de Você
+E eu dentro de Você
+E eu dentro de Você
+E eu dentro de Você
+
+Agora nós dois somos um
+Agora nós dois somos um
+Agora nós dois somos um
+Agora nós dois somos um
+`
+                }
+            ]
+        },
+        {
+            moment: "Pós-Comunhão",
+            icon: "fas fa-praying-hands",
+            songs: [
+                {
+                    title: "Não Escolhida",
+                    key: "D",
+                    lyrics: ``
+                }
+            ]
+        },
+        {
+            moment: "Final",
+            icon: "fas fa-praying-hands",
+            songs: [
+                {
+                    title: "Não Escolhida",
+                    key: "D",
+                    lyrics: ``
+                }
+            ]
+        }
+    ];
+
+    // Função para criar links da liturgia
+    function createLiturgyLinks() {
+        const liturgyContainer = document.getElementById('liturgy-links');
+        liturgyContainer.innerHTML = '';
+
+        musicData.forEach((moment, index) => {
+            const link = document.createElement('a');
+            link.className = 'liturgy-link';
+            link.href = `#moment-${index}`;
+            link.innerHTML = `
+                    <i class="${moment.icon}"></i>
+                    <span>${moment.moment}</span>
+                `;
+
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetSection = document.getElementById(`moment-${index}`);
+                if (targetSection) {
+                    // Expande a seção
+                    const content = targetSection.querySelector('.moment-content');
+                    content.classList.add('expanded');
+                    const arrow = targetSection.querySelector('.moment-arrow');
+                    arrow.textContent = '▲';
+
+                    // Rola suavemente até a seção
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+
+            liturgyContainer.appendChild(link);
+        });
+    }
+
+    // Função para renderizar as músicas
+    function renderMusicList() {
+        const musicListContainer = document.getElementById('music-list');
+        musicListContainer.innerHTML = '';
+
+        musicData.forEach((moment, momentIndex) => {
+            const momentSection = document.createElement('div');
+            momentSection.className = 'moment-section';
+            momentSection.id = `moment-${momentIndex}`;
+
+            const momentHeader = document.createElement('div');
+            momentHeader.className = 'moment-header';
+            momentHeader.innerHTML = `
+                    <h2><i class="${moment.icon} moment-icon"></i> ${moment.moment}</h2>
+                    <span class="moment-arrow">▼</span>
+                `;
+
+            const momentContent = document.createElement('div');
+            momentContent.className = 'moment-content';
+
+            moment.songs.forEach((song, songIndex) => {
+                const songItem = document.createElement('div');
+                songItem.className = 'song-item';
+                songItem.innerHTML = `
+                        <div class="song-title">
+                            <span>${song.title}</span>
+                            <span class="song-key">${song.key}</span>
+                        </div>
+                        <div class="song-lyrics">${formatLyrics(song.lyrics)}</div>
+                        <button class="back-to-liturgy" onclick="scrollToLiturgy()">
+                            <i class="fas fa-arrow-left"></i> Voltar para a Liturgia
+                        </button>
+                    `;
+
+                momentContent.appendChild(songItem);
+            });
+
+            // Adicionar evento de clique para expandir/contrair o momento
+            momentHeader.addEventListener('click', function() {
+                momentContent.classList.toggle('expanded');
+                const arrow = this.querySelector('.moment-arrow');
+                arrow.textContent = momentContent.classList.contains('expanded') ? '▲' : '▼';
+            });
+
+            momentSection.appendChild(momentHeader);
+            momentSection.appendChild(momentContent);
+            musicListContainer.appendChild(momentSection);
+        });
+    }
+
+    // Função para rolar até a liturgia
+    function scrollToLiturgy() {
+        const liturgySection = document.querySelector('.liturgy-section');
+        if (liturgySection) {
+            liturgySection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            // Expande a liturgia
+            const liturgyContent = document.querySelector('.liturgy-content');
+            liturgyContent.classList.add('expanded');
+            const liturgyArrow = document.querySelector('.liturgy-arrow');
+            liturgyArrow.textContent = '▲';
+        }
+    }
+
+    // Função para tornar a liturgia expansível
+    function setupLiturgyExpansion() {
+        const liturgyHeader = document.querySelector('.liturgy-header');
+        const liturgyContent = document.querySelector('.liturgy-content');
+        const liturgyArrow = document.querySelector('.liturgy-arrow');
+
+        liturgyHeader.addEventListener('click', function() {
+            liturgyContent.classList.toggle('expanded');
+            liturgyArrow.textContent = liturgyContent.classList.contains('expanded') ? '▲' : '▼';
+        });
+    }
+
+    // Função para formatar acordes nas letras
+    function formatLyrics(lyrics) {
+        // Destacar acordes entre colchetes
+        return lyrics.replace(/\[(.*?)\]/g, '<span class="chord">[$1]</span>');
+    }
+
+    // Funções para controle de fonte
+    function increaseFontSize() {
+        const root = document.documentElement;
+        let currentSize = parseFloat(getComputedStyle(root).getPropertyValue('--font-size'));
+        if (currentSize < 22) {
+            root.style.setProperty('--font-size', (currentSize + 1) + 'px');
+        }
+    }
+
+    function decreaseFontSize() {
+        const root = document.documentElement;
+        let currentSize = parseFloat(getComputedStyle(root).getPropertyValue('--font-size'));
+        if (currentSize > 12) {
+            root.style.setProperty('--font-size', (currentSize - 1) + 'px');
+        }
+    }
+
+    function resetFontSize() {
+        document.documentElement.style.setProperty('--font-size', '16px');
+    }
+
+    // Função para expandir/recolher todas as seções
+    function expandAll() {
+        document.querySelectorAll('.moment-content').forEach(content => {
+            content.classList.add('expanded');
+        });
+        document.querySelectorAll('.moment-arrow').forEach(arrow => {
+            arrow.textContent = '▲';
+        });
+        document.querySelector('.liturgy-content').classList.add('expanded');
+        document.querySelector('.liturgy-arrow').textContent = '▲';
+    }
+
+    function collapseAll() {
+        document.querySelectorAll('.moment-content').forEach(content => {
+            content.classList.remove('expanded');
+        });
+        document.querySelectorAll('.moment-arrow').forEach(arrow => {
+            arrow.textContent = '▼';
+        });
+        document.querySelector('.liturgy-content').classList.remove('expanded');
+        document.querySelector('.liturgy-arrow').textContent = '▼';
+    }
+
+    // Função de busca
+    function setupSearch() {
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            document.querySelectorAll('.moment-section').forEach(section => {
+                const momentHeader = section.querySelector('.moment-header h2').textContent.toLowerCase();
+                const songs = section.querySelectorAll('.song-item');
+                let hasMatch = false;
+
+                songs.forEach(song => {
+                    const title = song.querySelector('.song-title span').textContent.toLowerCase();
+                    const lyrics = song.querySelector('.song-lyrics').textContent.toLowerCase();
+
+                    if (title.includes(searchTerm) || lyrics.includes(searchTerm)) {
+                        song.style.display = 'block';
+                        hasMatch = true;
+                    } else {
+                        song.style.display = 'none';
+                    }
+                });
+
+                // Mostrar/ocultar seção baseado nos resultados
+                section.style.display = hasMatch || momentHeader.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+    }
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function() {
+        // Criar links da liturgia
+        createLiturgyLinks();
+
+        // Renderizar músicas
+        renderMusicList();
+
+        // Configurar expansão da liturgia
+        setupLiturgyExpansion();
+
+        // Adicionar eventos aos botões de controle de fonte
+        document.getElementById('increase-font').addEventListener('click', increaseFontSize);
+        document.getElementById('decrease-font').addEventListener('click', decreaseFontSize);
+        document.getElementById('reset-font').addEventListener('click', resetFontSize);
+
+        // Adicionar eventos aos botões de expandir/recolher
+        document.getElementById('expand-all').addEventListener('click', expandAll);
+        document.getElementById('collapse-all').addEventListener('click', collapseAll);
+
+        // Configurar busca
+        setupSearch();
+    });
+</script>
+</body>
+</html>
